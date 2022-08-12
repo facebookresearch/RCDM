@@ -117,11 +117,8 @@ class TrainLoop:
             self.resume_step = parse_resume_step_from_filename(resume_checkpoint)
             if dist.get_rank() == 0:
                 logger.log(f"loading model from checkpoint: {resume_checkpoint}...")
-                self.model.load_state_dict(
-                    dist_util.load_state_dict(
-                        resume_checkpoint, map_location=dist_util.dev()
-                    )
-                )
+                trained_model = th.load(resume_checkpoint, map_location=dist_util.dev())
+                self.model.load_state_dict(trained_model)
 
         dist_util.sync_params(self.model.parameters())
 
@@ -136,9 +133,7 @@ class TrainLoop:
         if ema_checkpoint:
             if dist.get_rank() == 0:
                 logger.log(f"loading EMA from checkpoint: {ema_checkpoint}...")
-                state_dict = dist_util.load_state_dict(
-                    ema_checkpoint, map_location=dist_util.dev()
-                )
+                state_dict = th.load(ema_checkpoint, map_location=dist_util.dev())
                 ema_params = self.mp_trainer.state_dict_to_master_params(state_dict)
 
         dist_util.sync_params(ema_params)
@@ -154,9 +149,7 @@ class TrainLoop:
         )
         if bf.exists(opt_checkpoint):
             logger.log(f"loading optimizer state from checkpoint: {opt_checkpoint}")
-            state_dict = dist_util.load_state_dict(
-                opt_checkpoint, map_location=dist_util.dev()
-            )
+            state_dict = th.load(opt_checkpoint, map_location=dist_util.dev())
             self.opt.load_state_dict(state_dict)
 
     def run_loop(self):
@@ -294,7 +287,7 @@ def find_resume_checkpoint():
     # On your infrastructure, you may want to override this to automatically
     # discover the latest checkpoint on your blob storage, etc.
     filelistall = os.listdir(get_blob_logdir())
-    max_filename = max(filelistall,key=extract_number)
+    max_filename = max(filelistall, key=extract_number)
     resume_step = extract_number(max_filename)[0]
     if resume_step == -1 or resume_step == 000000:
         return None, 0
