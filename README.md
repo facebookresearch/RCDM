@@ -92,8 +92,12 @@ The code is distributed under the MIT license. However the weights of the pretra
 
 # Cite the paper
 ```
-@inproceedings{bordes2021RCDM,
-      title={High Fidelity Visualization of What Your Self-Supervised Representation Knows About}, 
-      author={Florian Bordes, Randall Balestriero, Pascal Vincent},
-      year={2021}
+@article{
+      bordes2022high,
+      title={High Fidelity Visualization of What Your Self-Supervised Representation Knows About},
+      author={Florian Bordes and Randall Balestriero and Pascal Vincent},
+      journal={Transactions on Machine Learning Research},
+      year={2022},
+      url={https://openreview.net/forum?id=urfWb7VjmL},
+      note={}
 }
