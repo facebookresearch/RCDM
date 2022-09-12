@@ -85,6 +85,17 @@ def _list_image_files_recursively(data_dir):
     return results
 
 
+def load_single_image(path):
+    with bf.BlobFile(path, "rb") as f:
+        pil_image = Image.open(f)
+        pil_image.load()
+    pil_image = pil_image.convert("RGB")
+    # arr = np.array(pil_image)
+    arr = center_crop_arr(pil_image, 224)
+    arr = arr.astype(np.float32) / 127.5 - 1
+    arr = np.transpose(arr, [2, 0, 1])
+    return arr
+    
 class ImageDataset(Dataset):
     def __init__(
         self,
