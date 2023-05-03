@@ -6,17 +6,17 @@ Train a conditional (representation based) diffusion model on images.
 import argparse
 import torch as th
 import torch.nn as nn
-from guided_diffusion import dist_util, logger
-from guided_diffusion.image_datasets import load_data
-from guided_diffusion.resample import create_named_schedule_sampler
-from guided_diffusion.script_util import (
+from guided_diffusion_rcdm import dist_util, logger
+from guided_diffusion_rcdm.image_datasets import load_data
+from guided_diffusion_rcdm.resample import create_named_schedule_sampler
+from guided_diffusion_rcdm.script_util import (
     model_and_diffusion_defaults,
     create_model_and_diffusion,
     args_to_dict,
     add_dict_to_argparser,
 )
-from guided_diffusion.train_util import TrainLoop
-from guided_diffusion.get_ssl_models import get_model
+from guided_diffusion_rcdm.train_util import TrainLoop
+from guided_diffusion_rcdm.get_ssl_models import get_model
 from torch.cuda.amp import autocast
 
 def main(args):

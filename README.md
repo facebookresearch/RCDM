@@ -21,7 +21,7 @@ pip install -e .
 ```
 
 # Repository structure
-All the training and sampling scripts are located in scripts/. The SSL models that we used to compute the representations from are defined in the file ./guided_diffusion/get_ssl_models.py. The links of the pretrained RCDM models are located in ./guided_diffusion/get_rcdm_models.py.
+All the training and sampling scripts are located in scripts/. The SSL models that we used to compute the representations from are defined in the file ./guided_diffusion_rcdm/get_ssl_models.py. The links of the pretrained RCDM models are located in ./guided_diffusion/get_rcdm_models.py.
 
 ## Model FLAGS used in this repository
 All model availables through this repository were trained on a resolution of 128x128 pixels. In order to use the pretrained models, you'll need to export these following FLAGS:
@@ -39,6 +39,12 @@ python run_with_submitit.py --nodes 4 --ngpus 8 --use_volta32 $MODEL_FLAGS_128 $
 ```
 
 # Use a pretrained model
+
+To use any of the following pretrained models, you will need to install vissl:
+```
+pip install vissl
+```
+
 This repository comes with a set of model that were pretrained on ImageNet (please note that even if the code is released under the MIT licence, the weights of the model are only available under the [CC-BY-NC license](https://dl.fbaipublicfiles.com/rcdm/LICENSE)).  The models will be automatically downloaded when using any of the sampling scripts. However, you can also download them manually from the following links:
 
 | Model | SSL Model | Type (Trunk/Head) | url |

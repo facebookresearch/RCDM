@@ -11,11 +11,11 @@ import torch.distributed as dist
 from torchvision import datasets, transforms
 from torchvision.utils import make_grid, save_image
 
-from guided_diffusion.image_datasets import load_data
-from guided_diffusion import dist_util, logger
-from guided_diffusion.get_ssl_models import get_model
-from guided_diffusion.get_rcdm_models import get_dict_rcdm_model
-from guided_diffusion.script_util import (
+from guided_diffusion_rcdm.image_datasets import load_data
+from guided_diffusion_rcdm import dist_util, logger
+from guided_diffusion_rcdm.get_ssl_models import get_model
+from guided_diffusion_rcdm.get_rcdm_models import get_dict_rcdm_model
+from guided_diffusion_rcdm.script_util import (
     NUM_CLASSES,
     model_and_diffusion_defaults,
     create_model_and_diffusion,
