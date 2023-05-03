@@ -5,16 +5,16 @@ import os
 import torch as th
 import torch.nn as nn
 from torch.cuda.amp import autocast
-from guided_diffusion import dist_util
-from guided_diffusion.get_ssl_models import get_model
-from guided_diffusion.get_rcdm_models import get_dict_rcdm_model
-from guided_diffusion.script_util import (
+from guided_diffusion_rcdm import dist_util
+from guided_diffusion_rcdm.get_ssl_models import get_model
+from guided_diffusion_rcdm.get_rcdm_models import get_dict_rcdm_model
+from guided_diffusion_rcdm.script_util import (
     NUM_CLASSES,
     model_and_diffusion_defaults,
     create_model_and_diffusion,
     args_to_dict,
 )
-from guided_diffusion.image_datasets import load_single_image
+from guided_diffusion_rcdm.image_datasets import load_single_image
 
 class RCDM(nn.Module):
     def __init__(self, args):
